@@ -9,6 +9,7 @@ namespace RPSLSGAMEver5
    public class CMachine : IPlayer
     {
         public char Choosedkey { get; set; }
+        public int Score { get; set; }
 
         public char Getkey(CBoard board)
         {

@@ -6,8 +6,12 @@
         string DirectoryPath { get; set; }
         string ResultContent { get; set; }
         string ResultTimeStamp { get; set; }
-
+        string ResultFullPath { get; set; }
+        string FileName { get; set; }
+        string HumanNameMessage { get; set; }
+        string HumanName { get; set; }
+        void GetNameFromTheConsole(CBoard board);
         void CheckSaveDirectoryExsits();
-        void SaveTheResultToFile();
+        void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human);
     }
 }
