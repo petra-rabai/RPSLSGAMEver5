@@ -126,6 +126,23 @@ namespace RPSLSGAMEver5
                     break;
             }
         }
+        public void GameCore(CHuman human, CMachine machine, CResultSave resultSave)
+        {
+            ScoreReset(human, machine);
+            Console.WriteLine(AvailableItems + "\n" + WaitForInput);
+            human.Getkey(this);
+            machine.Getkey(this);
+            GetChoosedGameItem(human, machine);
+            ItemsEqualityCheck(human, machine);
+            LoadGameCompareItems();
+            RuleValidator();
+            ChooseTheWinner(ChoosedGameItems[0], ChoosedGameItems[1], human, machine);
+            ShowTheResult(human, machine);
+            Console.WriteLine(FinalizeNavigation + "\n" + WaitForInput);
+            human.Getkey(this);
+            GetChoosedMenuItem(human);
+            MenuNavigation(human, machine, resultSave);
+        }
 
         public void ChooseTheWinner(string optionOne, string optionTwo,CHuman human, CMachine machine)
         {
@@ -142,23 +159,7 @@ namespace RPSLSGAMEver5
             }
         }
 
-        public void GameCore(CHuman human, CMachine machine, CResultSave resultSave)
-        {
-            ScoreReset(human, machine);
-            Console.WriteLine(AvailableItems + "\n" + WaitForInput);
-            human.Getkey(this);
-            machine.Getkey(this);
-            GetChoosedGameItem(human, machine);
-            ItemsEqualityCheck(human, machine);
-            LoadGameCompareItems();
-            RuleValidator();
-            ChooseTheWinner(ChoosedGameItems[0], ChoosedGameItems[1],human,machine);
-            ShowTheResult(human, machine);
-            Console.WriteLine(FinalizeNavigation + "\n" + WaitForInput);
-            human.Getkey(this);
-            GetChoosedMenuItem(human);
-            MenuNavigation(human, machine,resultSave);
-        }
+       
 
         public string[] GetChoosedGameItem(CHuman human, CMachine machine)
         {
