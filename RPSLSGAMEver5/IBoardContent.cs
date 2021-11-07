@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RPSLSGAMEver5
 {
-    public interface IContent
+    public interface IBoardContent
     {
         string Title { get; set; }
         string WelcomeMessage { get; set; }
@@ -15,7 +15,7 @@ namespace RPSLSGAMEver5
         string AvailableItems { get; set; }
         string ItemsEqual { get; set; }
         string HitValidKey { get; set; }
-        string AddHumanName { get; set; }
+       
         string PlayerWinMessage { get; set; }
         string PlayerPointMessage { get; set; }
         string PlayerChoosedOptionMessage { get; set; }
@@ -26,6 +26,6 @@ namespace RPSLSGAMEver5
         string GameRulesMessage { get; set; }
         string GameRulesNavigation { get; set; }
 
-        void LoadContentResources();
+        void LoadBoardContentResources();
     }
 }

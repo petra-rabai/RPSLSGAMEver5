@@ -48,7 +48,7 @@
     <Compile Include="CMachine.cs" />
     <Compile Include="CResultSave.cs" />
     <Compile Include="IBoard.cs" />
-    <Compile Include="IContent.cs" />
+    <Compile Include="IBoardContent.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IResultSave.cs" />
     <Compile Include="Program.cs" />

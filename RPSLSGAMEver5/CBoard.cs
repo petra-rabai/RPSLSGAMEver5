@@ -7,7 +7,7 @@ using RPSLSGAMEver5.Properties;
 
 namespace RPSLSGAMEver5
 {
-    public class CBoard : IBoard, IContent
+    public class CBoard : IBoard, IBoardContent
     {
         public Dictionary<char, string> GameMenu { get; set; } = new Dictionary<char, string>
         {
@@ -27,14 +27,14 @@ namespace RPSLSGAMEver5
 
         };
         public string ChoosedMenu { get; set; }
-        public string[] ChoosedGameItems { get; set; }
+        public string[] ChoosedGameItems { get; set; } = new string[2];
         public string Title { get; set; }
         public string WelcomeMessage { get; set; }
         public string WaitForInput { get; set; }
         public string AvailableItems { get; set; }
         public string ItemsEqual { get; set; }
         public string HitValidKey { get; set; }
-        public string AddHumanName { get; set; }
+        
 
         public Dictionary<Tuple<string, string>, string> RuleCheck { get; } =
            new Dictionary<Tuple<string, string>, string>()
@@ -62,7 +62,7 @@ namespace RPSLSGAMEver5
            };
         public Tuple<string, string> GameCompareChoosedItems { get; set; }
         public string Winner { get; set; }
-        public Dictionary<Tuple<string, string>, string> WinnerInfo { get; set; }
+        public Dictionary<Tuple<string, string>, string> WinnerInfo { get; set; } = new Dictionary<Tuple<string, string>, string>();
         public string PlayerWinMessage { get; set; }
         public string PlayerPointMessage { get; set; }
         public string PlayerChoosedOptionMessage { get; set; }
@@ -71,7 +71,61 @@ namespace RPSLSGAMEver5
         public string PlayerLoseMessage { get; set; }
         public string FinalizeNavigation { get; set; }
         public string GameRulesMessage { get; set; }
-        public string GameRulesNavigation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string GameRulesNavigation { get; set; }
+
+        public void Initialize(CHuman human, CMachine machine, CResultSave resultSave)
+        {
+            LoadBoardContentResources();
+            LoadWelcomeScreen(human);
+            MenuNavigation(human, machine, resultSave);
+        }
+        public void LoadBoardContentResources()
+        {
+            Title = Resources.gameTitle;
+            WelcomeMessage = Resources.gameWelcomeMessage;
+            WaitForInput = Resources.WaitForInputMessage;
+            AvailableItems = Resources.gameAvailableItems;
+            ItemsEqual = Resources.gameItemsEqualMessage;
+            HitValidKey = Resources.playerHitValidKeyMessage;
+            PlayerWinMessage = Resources.playerWinMessage;
+            PlayerPointMessage = Resources.playerPointMessage;
+            PlayerChoosedOptionMessage = Resources.playerChoosedOptionMessage;
+            MachineChoosedOptionMessage = Resources.machineChoosedOtionMessage;
+            MachinePointMessage = Resources.machinePointMessage;
+            PlayerLoseMessage = Resources.playerLoseMessage;
+            FinalizeNavigation = Resources.playerGameFinalizeNavigationMessage;
+            GameRulesMessage = Resources.gameRulesMessage;
+            GameRulesNavigation = Resources.playerGameRulesNavigationMessage;
+        }
+        public void LoadWelcomeScreen(CHuman human)
+        {
+            Console.Title = Title;
+            Console.WriteLine(WelcomeMessage + "\n" + WaitForInput);
+            human.Getkey(this);
+            
+        }
+        public void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave)
+        {
+            GetChoosedMenuItem(human);
+            switch (ChoosedMenu)
+            {
+                case "Start the Game":
+                    GameCore(human, machine, resultSave);
+                    break;
+                case "Game Help":
+                    Help(human, machine, resultSave);
+                    break;
+                case "Back to the Menu":
+                    LoadWelcomeScreen(human);
+                    break;
+                case "Save the Result":
+                    resultSave.SaveTheResultToFile(this, machine, human);
+                    break;
+                case "Quit the Game":
+                    Environment.Exit(0);
+                    break;
+            }
+        }
 
         public void ChooseTheWinner(string optionOne, string optionTwo,CHuman human, CMachine machine)
         {
@@ -119,11 +173,7 @@ namespace RPSLSGAMEver5
             return ChoosedMenu;
         }
 
-        public void Initialize(CHuman human, CMachine machine, CResultSave resultSave)
-        {
-            LoadContentResources();
-            LoadWelcomeScreen(human,machine,resultSave);
-        }
+       
 
         public void ItemsEqualityCheck(CHuman human, CMachine machine)
         {
@@ -137,53 +187,14 @@ namespace RPSLSGAMEver5
             }
         }
 
-        public void LoadContentResources()
-        {
-            Title = Resources.gameTitle;
-            WelcomeMessage = Resources.gameWelcomeMessage;
-            WaitForInput = Resources.WaitForInputMessage;
-            AvailableItems = Resources.gameAvailableItems;
-            ItemsEqual = Resources.gameItemsEqualMessage;
-            HitValidKey = Resources.playerHitValidKeyMessage;
-            AddHumanName = Resources.playerAddNameMessage;
-            PlayerWinMessage = Resources.playerWinMessage;
-            PlayerPointMessage = Resources.playerPointMessage;
-            PlayerChoosedOptionMessage = Resources.playerChoosedOptionMessage;
-            MachineChoosedOptionMessage = Resources.machineChoosedOtionMessage;
-            MachinePointMessage = Resources.machinePointMessage;
-            PlayerLoseMessage = Resources.playerLoseMessage;
-            FinalizeNavigation = Resources.playerGameFinalizeNavigationMessage;
-            GameRulesMessage = Resources.gameRulesMessage;
-            GameRulesNavigation = Resources.playerGameRulesNavigationMessage;
-        }
+       
 
         public void LoadGameCompareItems()
         {
             GameCompareChoosedItems = new Tuple<string, string>(ChoosedGameItems[0],ChoosedGameItems[1]);
         }
 
-        public void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave)
-        {
-            GetChoosedMenuItem(human);
-            switch (ChoosedMenu)
-            {
-                case "Start the Game":
-                    GameCore(human,machine,resultSave);
-                    break;
-                case "Game Help":
-                    Help(human, machine,resultSave);
-                    break;
-                case "Back to the Menu":
-                    LoadWelcomeScreen(human,machine,resultSave);
-                    break;
-                case "Save the Result":
-                    resultSave.SaveTheResultToFile(this,machine,human);
-                    break;
-                case "Quit the Game":
-                    Environment.Exit(0);
-                    break;
-            }
-        }
+       
 
         public string RuleValidator()
         {
@@ -227,14 +238,7 @@ namespace RPSLSGAMEver5
             }
         }
 
-        public void LoadWelcomeScreen(CHuman human, CMachine machine, CResultSave resultSave)
-        {
-            Console.Title = Title;
-            Console.WriteLine(WelcomeMessage + "\n" + WaitForInput);
-            human.Getkey(this);
-            GetChoosedMenuItem(human);
-            MenuNavigation(human,machine,resultSave);
-        }
+       
 
         public void Help(CHuman human, CMachine machine, CResultSave resultSave)
         {

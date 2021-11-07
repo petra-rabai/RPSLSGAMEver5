@@ -20,7 +20,7 @@ namespace RPSLSGAMEver5
         string GetChoosedMenuItem(CHuman human);
         void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave);
         void Initialize(CHuman human, CMachine machine, CResultSave resultSave);
-        void LoadWelcomeScreen(CHuman human, CMachine machine, CResultSave resultSave);
+        void LoadWelcomeScreen(CHuman human);
         void GameCore(CHuman human, CMachine machine, CResultSave resultSave);
         void ItemsEqualityCheck(CHuman human, CMachine machine);
         void LoadGameCompareItems();

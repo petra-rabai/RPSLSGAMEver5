@@ -18,7 +18,7 @@ namespace RPSLSGAMEver5
         public string FileName { get; set; }
         public string HumanNameMessage { get; set; }
         public string HumanName { get; set; }
-
+        public string AddHumanName { get; set; }
         public void CheckSaveDirectoryExsits()
         {
             DirectoryExist = Directory.Exists(DirectoryPath);
@@ -30,27 +30,34 @@ namespace RPSLSGAMEver5
 
         public void GetNameFromTheConsole(CBoard board)
         {
-            Console.WriteLine(board.AddHumanName + "\n" + board.WaitForInput);
+            
+            Console.WriteLine(AddHumanName + "\n" + board.WaitForInput);
             HumanName = Console.ReadLine();
+        }
+
+        public void LoadResultContent()
+        {
+            AddHumanName = Resources.playerAddNameMessage;
+            FileName = Resources.gameSavedDataFileName;
+            HumanNameMessage = Resources.playerNameMessage;
         }
 
         public void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human)
         {
-            FileName = Resources.gameSavedDataFileName;
-            HumanNameMessage = Resources.playerNameMessage;
+            LoadResultContent();
             CheckSaveDirectoryExsits();
             GetNameFromTheConsole(board);
             ResultContent = ResultTimeStamp
-                                             + HumanNameMessage
-                                             + HumanName
-                                             + board.WinnerInfo.Values
-                                             + board.PlayerPointMessage
-                                             + human.Score
-                                             + board.MachinePointMessage
-                                             + machine.Score
-                                             + board.PlayerChoosedOptionMessage
-                                             + board.ChoosedGameItems[0]
-                                             + board.MachineChoosedOptionMessage
+                                             + HumanNameMessage + "\n"
+                                             + HumanName + "\n"
+                                             + board.WinnerInfo[board.GameCompareChoosedItems] + "\n"
+                                             + board.PlayerPointMessage + "\n"
+                                             + human.Score + "\n"
+                                             + board.MachinePointMessage + "\n"
+                                             + machine.Score + "\n"
+                                             + board.PlayerChoosedOptionMessage + "\n"
+                                             + board.ChoosedGameItems[0] + "\n"
+                                             + board.MachineChoosedOptionMessage + "\n"
                                              + board.ChoosedGameItems[1];
             ResultFullPath = DirectoryPath + FileName;
             File.AppendAllText(ResultFullPath, ResultContent);

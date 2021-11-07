@@ -10,8 +10,10 @@
         string FileName { get; set; }
         string HumanNameMessage { get; set; }
         string HumanName { get; set; }
+        string AddHumanName { get; set; }
         void GetNameFromTheConsole(CBoard board);
         void CheckSaveDirectoryExsits();
         void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human);
+        void LoadResultContent();
     }
 }
