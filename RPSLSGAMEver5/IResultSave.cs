@@ -15,5 +15,6 @@
         void CheckSaveDirectoryExsits();
         void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human);
         void LoadResultContent();
+        void SaveingProcess(CBoard board, CMachine machine, CHuman human);
     }
 }

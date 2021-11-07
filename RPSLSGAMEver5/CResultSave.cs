@@ -15,6 +15,22 @@ namespace RPSLSGAMEver5
         public string HumanNameMessage { get; set; }
         public string HumanName { get; set; }
         public string AddHumanName { get; set; }
+
+        public void SaveingProcess(CBoard board, CMachine machine, CHuman human)
+        {
+            LoadResultContent();
+            CheckSaveDirectoryExsits();
+            GetNameFromTheConsole(board);
+            SaveTheResultToFile(board, machine, human);
+        }
+
+        public void LoadResultContent()
+        {
+            AddHumanName = Resources.playerAddNameMessage;
+            FileName = Resources.gameSavedDataFileName;
+            HumanNameMessage = Resources.playerNameMessage;
+        }
+
         public void CheckSaveDirectoryExsits()
         {
             DirectoryExist = Directory.Exists(DirectoryPath);
@@ -31,18 +47,8 @@ namespace RPSLSGAMEver5
             HumanName = Console.ReadLine();
         }
 
-        public void LoadResultContent()
-        {
-            AddHumanName = Resources.playerAddNameMessage;
-            FileName = Resources.gameSavedDataFileName;
-            HumanNameMessage = Resources.playerNameMessage;
-        }
-
         public void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human)
-        {
-            LoadResultContent();
-            CheckSaveDirectoryExsits();
-            GetNameFromTheConsole(board);
+        {   
             ResultContent = ResultTimeStamp
                                              + HumanNameMessage + "\n"
                                              + HumanName + "\n"
