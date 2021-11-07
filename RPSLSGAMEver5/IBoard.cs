@@ -15,7 +15,6 @@ namespace RPSLSGAMEver5
         string ChoosedMenu { get; set; }
         Tuple<string, string> GameCompareChoosedItems { get; set; }
         string Winner { get; set; }
-        Dictionary<Tuple<string, string>, string> WinnerInfo { get; set; }
         string[] GetChoosedGameItem(CHuman human, CMachine machine);
         string GetChoosedMenuItem(CHuman human);
         void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave);

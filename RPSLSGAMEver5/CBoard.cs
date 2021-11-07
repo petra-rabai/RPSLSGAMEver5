@@ -62,7 +62,6 @@ namespace RPSLSGAMEver5
            };
         public Tuple<string, string> GameCompareChoosedItems { get; set; }
         public string Winner { get; set; }
-        public Dictionary<Tuple<string, string>, string> WinnerInfo { get; set; } = new Dictionary<Tuple<string, string>, string>();
         public string PlayerWinMessage { get; set; }
         public string PlayerPointMessage { get; set; }
         public string PlayerChoosedOptionMessage { get; set; }
@@ -140,7 +139,6 @@ namespace RPSLSGAMEver5
             ShowTheResult(human, machine);
             Console.WriteLine(FinalizeNavigation + "\n" + WaitForInput);
             human.Getkey(this);
-            GetChoosedMenuItem(human);
             MenuNavigation(human, machine, resultSave);
         }
 
@@ -148,13 +146,11 @@ namespace RPSLSGAMEver5
         {
             if (optionOne == Winner)
             {
-                WinnerInfo.Add(GameCompareChoosedItems, optionOne);
                 human.Score++;
                 
             }
             if (optionTwo == Winner)
             {
-                WinnerInfo.Add(GameCompareChoosedItems, optionTwo);
                 machine.Score++;
             }
         }
@@ -218,7 +214,7 @@ namespace RPSLSGAMEver5
             if (human.Score > machine.Score)
             {
                 Console.WriteLine(PlayerWinMessage
-                                              + WinnerInfo[GameCompareChoosedItems]
+                                              + Winner
                                               + PlayerPointMessage
                                               + human.Score
                                               + PlayerChoosedOptionMessage
@@ -229,7 +225,7 @@ namespace RPSLSGAMEver5
             else
             {
                 Console.WriteLine(PlayerLoseMessage
-                                              + WinnerInfo[GameCompareChoosedItems]
+                                              + Winner
                                               + MachinePointMessage
                                               + machine.Score
                                               + PlayerChoosedOptionMessage

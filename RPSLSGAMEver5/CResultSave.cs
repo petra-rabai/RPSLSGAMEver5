@@ -50,7 +50,7 @@ namespace RPSLSGAMEver5
             ResultContent = ResultTimeStamp
                                              + HumanNameMessage + "\n"
                                              + HumanName + "\n"
-                                             + board.WinnerInfo[board.GameCompareChoosedItems] + "\n"
+                                             + board.Winner + "\n"
                                              + board.PlayerPointMessage + "\n"
                                              + human.Score + "\n"
                                              + board.MachinePointMessage + "\n"
