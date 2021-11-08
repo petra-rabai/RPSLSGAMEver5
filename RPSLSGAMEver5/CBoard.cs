@@ -122,6 +122,11 @@ namespace RPSLSGAMEver5
                     break;
             }
         }
+        public string GetChoosedMenuItem(CHuman human)
+        {
+            ChoosedMenu = GameMenu[human.Choosedkey];
+            return ChoosedMenu;
+        }
         public void GameCore(CHuman human, CMachine machine, CResultSave resultSave)
         {
             ScoreReset(human, machine);
@@ -138,6 +143,41 @@ namespace RPSLSGAMEver5
             human.Getkey(this);
             MenuNavigation(human, machine, resultSave);
         }
+        public void ScoreReset(CHuman human, CMachine machine)
+        {
+            human.Score = 0;
+            machine.Score = 0;
+        }
+        public string[] GetChoosedGameItem(CHuman human, CMachine machine)
+        {
+            ChoosedGameItems[0] = GameItems[human.Choosedkey];
+            ChoosedGameItems[1] = GameItems[machine.Choosedkey];
+            return ChoosedGameItems;
+        }
+        public void ItemsEqualityCheck(CHuman human, CMachine machine)
+        {
+            if (ChoosedGameItems[0] == ChoosedGameItems[1])
+            {
+                Console.WriteLine(ItemsEqual);
+                human.CheckChoosedKeyIsvalid(this);
+                human.Getkey(this);
+                machine.Getkey(this);
+                GetChoosedGameItem(human, machine);
+            }
+        }
+        public void LoadGameCompareItems()
+        {
+            GameCompareChoosedItems = new Tuple<string, string>(ChoosedGameItems[0], ChoosedGameItems[1]);
+        }
+        public string RuleValidator()
+        {
+            if (RuleCheck.ContainsKey(GameCompareChoosedItems))
+            {
+                Winner = RuleCheck[GameCompareChoosedItems];
+            }
+
+            return Winner;
+        }
 
         public void ChooseTheWinner(string optionOne, string optionTwo,CHuman human, CMachine machine)
         {
@@ -151,61 +191,6 @@ namespace RPSLSGAMEver5
                 machine.Score++;
             }
         }
-
-       
-
-        public string[] GetChoosedGameItem(CHuman human, CMachine machine)
-        {
-            ChoosedGameItems[0] = GameItems[human.Choosedkey];
-            ChoosedGameItems[1] = GameItems[machine.Choosedkey];
-            return ChoosedGameItems;
-        }
-
-        public string GetChoosedMenuItem(CHuman human)
-        {
-            ChoosedMenu = GameMenu[human.Choosedkey];
-            return ChoosedMenu;
-        }
-
-       
-
-        public void ItemsEqualityCheck(CHuman human, CMachine machine)
-        {
-            if (ChoosedGameItems[0] == ChoosedGameItems[1])
-            {
-                Console.WriteLine(ItemsEqual);
-                human.CheckChoosedKeyIsvalid(this);
-                human.Getkey(this);
-                machine.Getkey(this);
-                GetChoosedGameItem(human, machine);
-            }
-        }
-
-       
-
-        public void LoadGameCompareItems()
-        {
-            GameCompareChoosedItems = new Tuple<string, string>(ChoosedGameItems[0],ChoosedGameItems[1]);
-        }
-
-       
-
-        public string RuleValidator()
-        {
-            if (RuleCheck.ContainsKey(GameCompareChoosedItems))
-            {
-                Winner = RuleCheck[GameCompareChoosedItems];
-            }
-
-            return Winner;
-        }
-
-        public void ScoreReset(CHuman human, CMachine machine)
-        {
-            human.Score = 0;
-            machine.Score = 0;
-        }
-
         public void ShowTheResult(CHuman human, CMachine machine)
         {
             if (human.Score > machine.Score)
@@ -231,9 +216,6 @@ namespace RPSLSGAMEver5
                                               + ChoosedGameItems[1]);
             }
         }
-
-       
-
         public void Help(CHuman human, CMachine machine, CResultSave resultSave)
         {
             Console.WriteLine(GameRulesMessage
