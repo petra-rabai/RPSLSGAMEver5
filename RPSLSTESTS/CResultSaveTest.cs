@@ -10,9 +10,10 @@ namespace RPSLSTESTS
         [Test]
         public void CheckCreateGameResultDirectorySuccess(string expectedGameDirectory)
         {
-            CResultSave resultSave  = new CResultSave();
-
-            resultSave.DirectoryPath = expectedGameDirectory;
+            CResultSave resultSave = new CResultSave
+            {
+                DirectoryPath = expectedGameDirectory
+            };
             resultSave.CheckSaveDirectoryExsits();
 
             DirectoryAssert.Exists(expectedGameDirectory);
@@ -26,8 +27,6 @@ namespace RPSLSTESTS
             CMachine machine = new CMachine();
             CResultSave resultSave = new CResultSave();
             CBoard board = new CBoard();
-            var expectedFileName = "";
-            var expectedFileData = "";
             var temporaryFileName = "SavingTest.txt";
             resultSave.FileName = temporaryFileName;
             resultSave.HumanName = "Test";
@@ -37,8 +36,8 @@ namespace RPSLSTESTS
             board.ChoosedGameItems[1] = "Scissor"; ;
 
             resultSave.SaveTheResultToFile(board, machine,human);
-            expectedFileName = resultSave.ResultFullPath;
-            expectedFileData = resultSave.ResultContent;
+            string expectedFileName = resultSave.ResultFullPath;
+            string expectedFileData = resultSave.ResultContent;
 
             DirectoryAssert.Exists(resultSave.DirectoryPath);
             FileAssert.Exists(expectedFileName);
