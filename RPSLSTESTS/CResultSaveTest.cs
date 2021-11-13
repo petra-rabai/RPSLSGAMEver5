@@ -4,7 +4,7 @@ using System.IO;
 
 namespace RPSLSTESTS
 {
-    public class ResultSaveTests
+    public class CResultSaveTests
     {
         [TestCase("C:\\Test\\")]
         [Test]
@@ -17,6 +17,7 @@ namespace RPSLSTESTS
             resultSave.CheckSaveDirectoryExsits();
 
             DirectoryAssert.Exists(expectedGameDirectory);
+            Assert.IsFalse(resultSave.DirectoryExist);
             Directory.Delete(expectedGameDirectory);
         }
 
@@ -42,6 +43,7 @@ namespace RPSLSTESTS
             DirectoryAssert.Exists(resultSave.DirectoryPath);
             FileAssert.Exists(expectedFileName);
             Assert.AreEqual(expectedFileData, resultSave.ResultContent);
+            Assert.IsNotEmpty(resultSave.ResultTimeStamp);
             File.Delete(temporaryFileName);
         }
 
