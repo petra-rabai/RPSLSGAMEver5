@@ -12,18 +12,18 @@ namespace RPSLSGAMEver5
         string ChoosedMenu { get; set; }
         Tuple<string, string> GameCompareChoosedItems { get; set; }
         string Winner { get; set; }
-        string[] GetChoosedGameItem(CHuman human, CMachine machine);
-        string GetChoosedMenuItem(CHuman human);
-        void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave);
-        void Initialize(CHuman human, CMachine machine, CResultSave resultSave);
-        void LoadWelcomeScreen(CHuman human);
-        void GameCore(CHuman human, CMachine machine, CResultSave resultSave);
-        void ItemsEqualityCheck(CHuman human, CMachine machine);
+        string[] GetChoosedGameItem(Human human, Machine machine);
+        string GetChoosedMenuItem(Human human);
+        void MenuNavigation(Human human, Machine machine, ResultSave resultSave);
+        void Initialize(Human human, Machine machine, ResultSave resultSave);
+        void LoadWelcomeScreen(Human human);
+        void GameCore(Human human, Machine machine, ResultSave resultSave);
+        void ItemsEqualityCheck(Human human, Machine machine);
         void LoadGameCompareItems();
         string RuleValidator();
-        void ChooseTheWinner(string optionOne, string optionTwo, CHuman human, CMachine machine);
-        void ScoreReset(CHuman human, CMachine machine);
-        void ShowTheResult(CHuman human, CMachine machine);
-        void Help(CHuman human, CMachine machine, CResultSave resultSave);
+        void ChooseTheWinner(string optionOne, string optionTwo, Human human, Machine machine);
+        void ScoreReset(Human human, Machine machine);
+        void ShowTheResult(Human human, Machine machine);
+        void Help(Human human, Machine machine, ResultSave resultSave);
     }
 }

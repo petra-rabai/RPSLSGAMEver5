@@ -4,7 +4,7 @@ using System.IO;
 
 namespace RPSLSGAMEver5
 {
-    public class CResultSave : IResultSave
+    public class ResultSave : IResultSave
     {
         public string DirectoryPath { get; set; } = Settings.Default.DefaultFolderPath;
         public string ResultContent { get; set; }
@@ -16,12 +16,17 @@ namespace RPSLSGAMEver5
         public string HumanName { get; set; }
         public string AddHumanName { get; set; }
 
-        public void SaveingProcess(CBoard board, CMachine machine, CHuman human)
+        public void SaveingProcess(Board board, Machine machine, Human human)
         {
+            Console.Clear();
             LoadResultContent();
             CheckSaveDirectoryExsits();
             GetNameFromTheConsole(board);
             SaveTheResultToFile(board, machine, human);
+            Console.WriteLine("Result saved successful!");
+            Console.WriteLine("Hit the Q key to Quit the Game");
+            human.Getkey(board);
+            board.MenuNavigation(human, machine, this);
         }
 
         public void LoadResultContent()
@@ -40,19 +45,19 @@ namespace RPSLSGAMEver5
             }
         }
 
-        public void GetNameFromTheConsole(CBoard board)
+        public void GetNameFromTheConsole(Board board)
         {
             
-            Console.WriteLine(AddHumanName + "\n" + board.WaitForInput);
+            Console.WriteLine(AddHumanName + "\n"+"\n" + board.WaitForInput);
             HumanName = Console.ReadLine();
         }
 
-        public void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human)
+        public void SaveTheResultToFile(Board board, Machine machine, Human human)
         {   
-            ResultContent = ResultTimeStamp
+            ResultContent = ResultTimeStamp + "\n"
                                              + HumanNameMessage + "\n"
                                              + HumanName + "\n"
-                                             + board.Winner + "\n"
+                                             + "The Winner is: "+board.Winner + "\n"
                                              + board.PlayerPointMessage + "\n"
                                              + human.Score + "\n"
                                              + board.MachinePointMessage + "\n"

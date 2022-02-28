@@ -4,7 +4,7 @@ using RPSLSGAMEver5.Properties;
 
 namespace RPSLSGAMEver5
 {
-    public class CBoard : IBoard, IBoardContent
+    public class Board : IBoard, IBoardContent
     {
         public Dictionary<char, string> GameMenu { get; set; } = new Dictionary<char, string>
         {
@@ -69,7 +69,7 @@ namespace RPSLSGAMEver5
         public string GameRulesMessage { get; set; }
         public string GameRulesNavigation { get; set; }
 
-        public void Initialize(CHuman human, CMachine machine, CResultSave resultSave)
+        public void Initialize(Human human, Machine machine, ResultSave resultSave)
         {
             LoadBoardContentResources();
             LoadWelcomeScreen(human);
@@ -93,14 +93,14 @@ namespace RPSLSGAMEver5
             GameRulesMessage = Resources.gameRulesMessage;
             GameRulesNavigation = Resources.playerGameRulesNavigationMessage;
         }
-        public void LoadWelcomeScreen(CHuman human)
+        public void LoadWelcomeScreen(Human human)
         {
             Console.Title = Title;
-            Console.WriteLine(WelcomeMessage + "\n" + WaitForInput);
+            Console.WriteLine(WelcomeMessage + "\n" + "\n" + WaitForInput);
             human.Getkey(this);
             
         }
-        public void MenuNavigation(CHuman human, CMachine machine, CResultSave resultSave)
+        public void MenuNavigation(Human human, Machine machine, ResultSave resultSave)
         {
             GetChoosedMenuItem(human);
             switch (ChoosedMenu)
@@ -115,22 +115,25 @@ namespace RPSLSGAMEver5
                     LoadWelcomeScreen(human);
                     break;
                 case "Save the Result":
-                    resultSave.SaveTheResultToFile(this, machine, human);
+                    resultSave.SaveingProcess(this,machine,human);
+                    
+                    
                     break;
                 case "Quit the Game":
                     Environment.Exit(0);
                     break;
             }
         }
-        public string GetChoosedMenuItem(CHuman human)
+        public string GetChoosedMenuItem(Human human)
         {
             ChoosedMenu = GameMenu[human.Choosedkey];
             return ChoosedMenu;
         }
-        public void GameCore(CHuman human, CMachine machine, CResultSave resultSave)
+        public void GameCore(Human human, Machine machine, ResultSave resultSave)
         {
             ScoreReset(human, machine);
-            Console.WriteLine(AvailableItems + "\n" + WaitForInput);
+            Console.Clear();
+            Console.WriteLine(AvailableItems + "\n" +"\n" + WaitForInput);
             human.Getkey(this);
             machine.Getkey(this);
             GetChoosedGameItem(human, machine);
@@ -138,23 +141,23 @@ namespace RPSLSGAMEver5
             LoadGameCompareItems();
             RuleValidator();
             ChooseTheWinner(ChoosedGameItems[0], ChoosedGameItems[1], human, machine);
-            ShowTheResult(human, machine);
-            Console.WriteLine(FinalizeNavigation + "\n" + WaitForInput);
+            ShowTheResult(human, machine);           
+            Console.WriteLine("\n"+FinalizeNavigation + "\n" + "\n" + WaitForInput);
             human.Getkey(this);
             MenuNavigation(human, machine, resultSave);
         }
-        public void ScoreReset(CHuman human, CMachine machine)
+        public void ScoreReset(Human human, Machine machine)
         {
             human.Score = 0;
             machine.Score = 0;
         }
-        public string[] GetChoosedGameItem(CHuman human, CMachine machine)
+        public string[] GetChoosedGameItem(Human human, Machine machine)
         {
             ChoosedGameItems[0] = GameItems[human.Choosedkey];
             ChoosedGameItems[1] = GameItems[machine.Choosedkey];
             return ChoosedGameItems;
         }
-        public void ItemsEqualityCheck(CHuman human, CMachine machine)
+        public void ItemsEqualityCheck(Human human, Machine machine)
         {
             if (ChoosedGameItems[0] == ChoosedGameItems[1])
             {
@@ -179,7 +182,7 @@ namespace RPSLSGAMEver5
             return Winner;
         }
 
-        public void ChooseTheWinner(string optionOne, string optionTwo,CHuman human, CMachine machine)
+        public void ChooseTheWinner(string optionOne, string optionTwo,Human human, Machine machine)
         {
             if (optionOne == Winner)
             {
@@ -191,32 +194,33 @@ namespace RPSLSGAMEver5
                 machine.Score++;
             }
         }
-        public void ShowTheResult(CHuman human, CMachine machine)
+        public void ShowTheResult(Human human, Machine machine)
         {
+            Console.Clear();
             if (human.Score > machine.Score)
             {
-                Console.WriteLine(PlayerWinMessage
-                                              + Winner
-                                              + PlayerPointMessage
-                                              + human.Score
-                                              + PlayerChoosedOptionMessage
-                                              + ChoosedGameItems[0]
-                                              + MachineChoosedOptionMessage
-                                              + ChoosedGameItems[1]);
+                Console.WriteLine(PlayerWinMessage + "\n" 
+                                              + Winner + "\n"
+                                              + PlayerPointMessage + "\n"
+                                              + human.Score + "\n"
+                                              + PlayerChoosedOptionMessage + "\n"
+                                              + ChoosedGameItems[0] + "\n"
+                                              + MachineChoosedOptionMessage + "\n"
+                                              + ChoosedGameItems[1] + "\n"); 
             }
             else
             {
                 Console.WriteLine(PlayerLoseMessage
-                                              + Winner
-                                              + MachinePointMessage
-                                              + machine.Score
-                                              + PlayerChoosedOptionMessage
-                                              + ChoosedGameItems[0]
-                                              + MachineChoosedOptionMessage
-                                              + ChoosedGameItems[1]);
+                                              + Winner + "\n"
+                                              + MachinePointMessage + "\n"
+                                              + machine.Score + "\n"
+                                              + PlayerChoosedOptionMessage + "\n"
+                                              + ChoosedGameItems[0] + "\n"
+                                              + MachineChoosedOptionMessage + "\n"
+                                              + ChoosedGameItems[1] + "\n");
             }
         }
-        public void Help(CHuman human, CMachine machine, CResultSave resultSave)
+        public void Help(Human human, Machine machine, ResultSave resultSave)
         {
             Console.WriteLine(GameRulesMessage
                               + "\n"

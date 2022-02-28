@@ -10,7 +10,7 @@ namespace RPSLSTESTS
         [Test]
         public void CheckCreateGameResultDirectorySuccess(string expectedGameDirectory)
         {
-            CResultSave resultSave = new CResultSave
+            ResultSave resultSave = new ResultSave
             {
                 DirectoryPath = expectedGameDirectory
             };
@@ -24,10 +24,10 @@ namespace RPSLSTESTS
         [Test]
         public void CheckResultSavingSuccess()
         {
-            CHuman human = new CHuman();
-            CMachine machine = new CMachine();
-            CResultSave resultSave = new CResultSave();
-            CBoard board = new CBoard();
+            Human human = new Human();
+            Machine machine = new Machine();
+            ResultSave resultSave = new ResultSave();
+            Board board = new Board();
             var temporaryFileName = "SavingTest.txt";
             resultSave.FileName = temporaryFileName;
             resultSave.HumanName = "Test";
@@ -50,7 +50,7 @@ namespace RPSLSTESTS
         [Test]
         public void CheckLoadResultContentSuccess()
         {
-            CResultSave resultSave = new CResultSave();
+            ResultSave resultSave = new ResultSave();
             var expectedAddHumanName = "";
             var expectedFileName = "";
             var expectedHumanNameMessage = "";

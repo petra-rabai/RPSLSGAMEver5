@@ -3,13 +3,13 @@ using RPSLSGAMEver5;
 
 namespace RPSLSTESTS
 {
-    internal class CHumanTest
+    internal class HumanTest
     {
         [Test]
         public void CheckChoosedKeyIsvalidSuccess()
         {
-            CHuman human = new CHuman();
-            CBoard board = new CBoard();
+            Human human = new Human();
+            Board board = new Board();
             human.CheckChoosedKeyIsvalid(board);
         }
     }

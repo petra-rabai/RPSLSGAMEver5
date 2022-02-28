@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CBoard.cs" />
-    <Compile Include="CHuman.cs" />
-    <Compile Include="CMachine.cs" />
-    <Compile Include="CResultSave.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="Human.cs" />
+    <Compile Include="Machine.cs" />
+    <Compile Include="ResultSave.cs" />
     <Compile Include="IBoard.cs" />
     <Compile Include="IBoardContent.cs" />
     <Compile Include="IPlayer.cs" />

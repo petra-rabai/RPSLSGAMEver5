@@ -4,10 +4,10 @@
     {
         static void Main(string[] args)
         {
-            CBoard board = new CBoard();
-            CHuman human = new CHuman();
-            CMachine machine = new CMachine();
-            CResultSave resultSave = new CResultSave();
+            Board board = new Board();
+            Human human = new Human();
+            Machine machine = new Machine();
+            ResultSave resultSave = new ResultSave();
             board.Initialize(human, machine, resultSave);
         }
     }

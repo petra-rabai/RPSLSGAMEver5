@@ -3,13 +3,13 @@ using RPSLSGAMEver5;
 
 namespace RPSLSTESTS
 {
-    internal class CBoardTest
+    internal class BoardTest
     {
         [Test]
 
         public void CheckLoadBoardContentResourcesSuccess()
         {
-            CBoard board = new CBoard();
+            Board board = new Board();
             board.LoadBoardContentResources();
         }
 
@@ -21,8 +21,8 @@ namespace RPSLSTESTS
         [Test]
         public void CheckGetChoosedMenuItemSuccess(char testKey, string testMenu)
         {
-            CHuman human = new CHuman();
-            CBoard board = new CBoard();
+            Human human = new Human();
+            Board board = new Board();
 
             human.Choosedkey = testKey;
 
@@ -35,9 +35,9 @@ namespace RPSLSTESTS
         [Test]
         public void CheckScoreResetSuccess(int testScore)
         {
-            CBoard board = new CBoard();
-            CMachine machine = new CMachine();
-            CHuman human = new CHuman();
+            Board board = new Board();
+            Machine machine = new Machine();
+            Human human = new Human();
 
             board.ScoreReset(human, machine);
 
@@ -49,9 +49,9 @@ namespace RPSLSTESTS
         [Test]
         public void CheckGetChoosedGameItemLoadSuccess(char testHumanKey,char testMachineKey) 
         {
-            CBoard board = new CBoard();
-            CMachine machine = new CMachine();
-            CHuman human = new CHuman();
+            Board board = new Board();
+            Machine machine = new Machine();
+            Human human = new Human();
             human.Choosedkey = testHumanKey;
             machine.Choosedkey = testMachineKey;
 
@@ -67,9 +67,9 @@ namespace RPSLSTESTS
         [Test]
         public void CheckCoreFunctionsSuccess(string testGameItemOne, string testGameItemTwo) 
         {
-            CBoard board = new CBoard();
-            CMachine machine = new CMachine();
-            CHuman human = new CHuman();
+            Board board = new Board();
+            Machine machine = new Machine();
+            Human human = new Human();
 
             board.ChoosedGameItems[0] = testGameItemOne;
             board.ChoosedGameItems[1] = testGameItemTwo;
@@ -79,8 +79,6 @@ namespace RPSLSTESTS
             board.ChooseTheWinner(testGameItemOne, testGameItemTwo, human, machine);
             board.ShowTheResult(human, machine);
 
-            Assert.IsNotEmpty(board.GameCompareChoosedItems.ToString());
-            Assert.IsNotEmpty(board.Winner);
         }
 
     }

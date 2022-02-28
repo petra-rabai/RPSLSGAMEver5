@@ -11,10 +11,10 @@
         string HumanNameMessage { get; set; }
         string HumanName { get; set; }
         string AddHumanName { get; set; }
-        void GetNameFromTheConsole(CBoard board);
+        void GetNameFromTheConsole(Board board);
         void CheckSaveDirectoryExsits();
-        void SaveTheResultToFile(CBoard board, CMachine machine, CHuman human);
+        void SaveTheResultToFile(Board board, Machine machine, Human human);
         void LoadResultContent();
-        void SaveingProcess(CBoard board, CMachine machine, CHuman human);
+        void SaveingProcess(Board board, Machine machine, Human human);
     }
 }

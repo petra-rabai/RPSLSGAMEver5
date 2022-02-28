@@ -3,13 +3,13 @@ using RPSLSGAMEver5;
 
 namespace RPSLSTESTS
 {
-    public class CMachineTest
+    public class MachineTest
     {
         [Test]
         public void CheckGetKeySuccess()
         {
-            CMachine machine = new CMachine();
-            CBoard board = new CBoard();
+            Machine machine = new Machine();
+            Board board = new Board();
 
             machine.Getkey(board);
 
@@ -20,8 +20,8 @@ namespace RPSLSTESTS
         [Test]
         public void CheckChoosedKeyIsvalidSuccess( char expectedChoosedKey)
         {
-            CMachine machine = new CMachine();
-            CBoard board = new CBoard();
+            Machine machine = new Machine();
+            Board board = new Board();
 
             machine.CheckChoosedKeyIsvalid(board);
 

@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace RPSLSGAMEver5
 {
-   public class CMachine : IPlayer
+   public class Machine : IPlayer
     {
         public char Choosedkey { get; set; }
         public int Score { get; set; }
 
-        public char Getkey(CBoard board)
+        public char Getkey(Board board)
         {
             Random choose = new Random();
             int chooseHelper = choose.Next(board.GameItems.Count);
@@ -21,7 +21,7 @@ namespace RPSLSGAMEver5
             return Choosedkey;
         }
 
-        public void CheckChoosedKeyIsvalid(CBoard board)
+        public void CheckChoosedKeyIsvalid(Board board)
         {
             if (!board.GameItems.ContainsKey(Choosedkey))
             {

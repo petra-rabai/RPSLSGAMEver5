@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace RPSLSGAMEver5
 {
-    public class CHuman : IPlayer
+    public class Human : IPlayer
     {
         public char Choosedkey { get; set; }
         public int Score { get; set; }
 
-        public char Getkey(CBoard board)
+        public char Getkey(Board board)
         {
             ReadKeyboard();
             while ((!board.GameMenu.ContainsKey(Choosedkey)) && (!board.GameItems.ContainsKey(Choosedkey)))
@@ -20,7 +20,7 @@ namespace RPSLSGAMEver5
             return Choosedkey;
         }
 
-        public void CheckChoosedKeyIsvalid(CBoard board)
+        public void CheckChoosedKeyIsvalid(Board board)
         {
             Console.WriteLine(board.HitValidKey);
 
